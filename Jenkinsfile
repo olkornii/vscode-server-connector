@@ -28,6 +28,8 @@ node('rhel8'){
 
     stage('Run Unit Test & UI Tests & Codecov') {
         wrap([$class: 'Xvnc']) {
+			// Download eap server before testing
+			sh "curl https://download-node-02.eng.bos.redhat.com/released/jboss/eap8/8.0.0-Beta/jboss-eap-8.0.0.Beta.zip -o out/test/ui-test/eap-server.zip"
             try {
                 sh "npm test --silent"
                 sh "npm run ui-test"

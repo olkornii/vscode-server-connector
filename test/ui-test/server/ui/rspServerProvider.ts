@@ -141,15 +141,21 @@ export class RSPServerProvider extends AbstractServer {
 
         // it might happen, depending on vscode settings, that native file manager dialog wont appear
         // instead we got input box where we can search for files
+        log.info("Wait 10 seconds before input server path...")
+        await new Promise((resolve) => setTimeout(resolve, 10000));
         try {
             const inputFile = await InputBox.create();
             await inputFile.setText(serverPath);
+            log.info("Wait 30 seconds before confirm...")
+            await new Promise((resolve) => setTimeout(resolve, 30000));
             await inputFile.confirm();
         } catch (error) {
             log.warn(`InputBox bar did not appear, ${error.name}`);
             throw error;
         }
 
+        log.info("Wait 30 seconds before secure storage...")
+        await new Promise((resolve) => setTimeout(resolve, 30000));
         // might get secure storage input box
         log.info(`Awaiting possible secure storage prompt`);
         try {
@@ -161,6 +167,8 @@ export class RSPServerProvider extends AbstractServer {
         } catch (error) {
             // no input box, we can continue
         }
+        log.info("Wait 30 seconds before webview...")
+        await new Promise((resolve) => setTimeout(resolve, 30000));
         // Since rsp-ui 0.23.9 there is by default new webView now
         // can be turned off by setting property: rsp-ui.newserverwebviewworkflow = false
         if (webView) {

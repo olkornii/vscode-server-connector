@@ -165,7 +165,7 @@ export class RSPServerProvider extends AbstractServer {
         // can be turned off by setting property: rsp-ui.newserverwebviewworkflow = false
         if (webView) {
             log.info(`Filling out new server details via webview`);
-            await VSBrowser.instance.driver.wait(async () => editorIsOpened('New Server'), 5000);
+            await VSBrowser.instance.driver.wait(async () => editorIsOpened('New Server'), 15000);
             const editorView = new EditorView();
             const editors = await editorView.getOpenEditorTitles();
             const newServerEditorName = editors.find(item => {

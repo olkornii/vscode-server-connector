@@ -141,8 +141,8 @@ export class RSPServerProvider extends AbstractServer {
 
         // it might happen, depending on vscode settings, that native file manager dialog wont appear
         // instead we got input box where we can search for files
-        log.info("Wait 10 seconds before input server path...")
-        await new Promise((resolve) => setTimeout(resolve, 10000));
+        log.info("Wait 1000 seconds before input server path...")
+        await new Promise((resolve) => setTimeout(resolve, 1000000));
         try {
             const inputFile = await InputBox.create();
             await inputFile.setText(serverPath);
